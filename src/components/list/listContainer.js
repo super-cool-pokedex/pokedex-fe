@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PokemonList from './pokemonList';
+import PokemonList from "./pokemonList";
 import Search from "./search";
 
 const ListContainer = () => {
@@ -54,21 +54,27 @@ const ListContainer = () => {
     };
 
     const searchChange = (e) => {
-        const val = e.target.value
-        setSearch(val)
-        setDisplayArr(() => {
-            return pokeArr.filter((element) => {
-                return element.name.includes(val)
+        const val = e.target.value;
+        setSearch(val);
+        setDisplayArr(
+            pokeArr.filter((element) => {
+                return element.name.includes(val);
             })
-        })
-    }
+        );
+    };
 
     return (
         <div>
             <Search search={search} searchChange={searchChange} />
-            <PokemonList loadNext={loadNext} loadPrevious={loadPrevious} pokeArr={displayArr} next={next} prev={prev} />
+            <PokemonList
+                loadNext={loadNext}
+                loadPrevious={loadPrevious}
+                pokeArr={displayArr}
+                next={next}
+                prev={prev}
+            />
         </div>
-    )
-}
+    );
+};
 
-export default ListContainer
+export default ListContainer;
