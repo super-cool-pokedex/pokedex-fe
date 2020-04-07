@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PokemonList from './pokemonList';
+import Search from "./search";
 
-const PokemonList = () => {
+const ListContainer = () => {
+    //TODO: move pokeArr into a context store, put in/pull out of localStorage
     const [pokeArr, setPokeArr] = useState([]);
+    const [displayArr, setDisplayArr] = useState([]);
+    const [search, setSearch] = useState("");
 
     const [prev, setPrev] = useState(null);
     const [next, setNext] = useState(null);
@@ -12,6 +17,7 @@ const PokemonList = () => {
             .get(`https://pokeapi.co/api/v2/pokemon`)
             .then((res) => {
                 setPokeArr(res.data.results);
+                setDisplayArr(res.data.results);
                 setNext(res.data.next);
             })
             .catch((err) => {
@@ -24,6 +30,7 @@ const PokemonList = () => {
             .get(`${next}`)
             .then((res) => {
                 setPokeArr(res.data.results);
+                setDisplayArr(res.data.results);
                 setNext(res.data.next);
                 setPrev(res.data.previous);
             })
@@ -37,6 +44,7 @@ const PokemonList = () => {
             .get(`${prev}`)
             .then((res) => {
                 setPokeArr(res.data.results);
+                setDisplayArr(res.data.results);
                 setPrev(res.data.previous);
                 setNext(res.data.next);
             })
@@ -45,15 +53,22 @@ const PokemonList = () => {
             });
     };
 
+    const searchChange = (e) => {
+        const val = e.target.value
+        setSearch(val)
+        setDisplayArr(() => {
+            return pokeArr.filter((element) => {
+                return element.name.includes(val)
+            })
+        })
+    }
+
     return (
         <div>
-            {pokeArr.map((pokemon) => (
-                <div>{pokemon.name}</div>
-            ))}
-            {prev ? <button onClick={loadPrevious}>Previous</button> : <></>}
-            {next ? <button onClick={loadNext}>Next</button> : <></>}
+            <Search search={search} searchChange={searchChange} />
+            <PokemonList loadNext={loadNext} loadPrevious={loadPrevious} pokeArr={displayArr} next={next} prev={prev} />
         </div>
-    );
-};
+    )
+}
 
-export default PokemonList;
+export default ListContainer
