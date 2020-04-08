@@ -1,9 +1,9 @@
 import React from "react";
 
-const PokemonList = ({loadPrevious, loadNext, pokeArr, next, prev}) => {
+const PokemonList = ({loadPrevious, loadNext, displayArr, next, prev}) => {
     return (
         <div>
-            {pokeArr.map((pokemon) => (
+            {displayArr.map((pokemon) => (
                 <div>{pokemon.name}</div>
             ))}
             {prev ? <button onClick={loadPrevious}>Previous</button> : <></>}

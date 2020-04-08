@@ -69,7 +69,7 @@ const ListContainer = () => {
             <PokemonList
                 loadNext={loadNext}
                 loadPrevious={loadPrevious}
-                pokeArr={displayArr}
+                displayArr={displayArr}
                 next={next}
                 prev={prev}
             />
