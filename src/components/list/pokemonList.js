@@ -10,7 +10,9 @@ const PokemonList = ({ loadPrevious, loadNext, displayArr, next, prev }) => {
     return (
         <div>
             {displayArr.map((pokemon, index) => {
-                const pokemonId = index + 1
+                const pokeSplit = pokemon.url.split("/")
+                //last character is a /, so last element is empty string
+                const pokemonId = pokeSplit[pokeSplit.length - 2]
                 return (
                     <Link
                         style={{ textDecoration: "none", color: "black" }}
