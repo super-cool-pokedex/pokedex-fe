@@ -1,13 +1,14 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import "./App.css";
-import ListContainer from "./components/list/listContainer";
+//Components
+import Routes from "./components/routes";
 
 function App() {
     return (
-        <div className="App">
-            <ListContainer />
-        </div>
+        <Router>
+            <Routes />
+        </Router>
     );
 }
 
