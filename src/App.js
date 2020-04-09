@@ -1,13 +1,23 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import "./App.css";
-import ListContainer from "./components/list/listContainer";
+//Components
+import Routes from "./components/routes";
+
+//Styles
+import { appStyles } from "./styles";
 
 function App() {
+    const classes = appStyles();
+
     return (
-        <div className="App">
-            <ListContainer />
-        </div>
+        <Router>
+            <div className={classes.maxWidth}>
+                <div className={classes.container}>
+                    <Routes />
+                </div>
+            </div>
+        </Router>
     );
 }
 
